@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/s_frag">
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#403b3b"></View>
+    <RadioGroup
+        android:id="@+id/s_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:textColor="#696464"
+            android:text="漫画"
+            android:button="@null"
+            android:drawableTop="@drawable/shop_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_button1"/>
+        <RadioButton
+            android:textColor="#696464"
+            android:text="发现"
+            android:button="@null"
+            android:drawableTop="@drawable/shop_2"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+
+            android:layout_height="wrap_content"
+            android:id="@+id/s_button2"/>
+        <RadioButton
+            android:textColor="#696464"
+            android:text="V社区"
+            android:button="@null"
+            android:drawableTop="@drawable/shop_3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_button3"/>
+        <RadioButton
+            android:textColor="#696464"
+            android:text="我的"
+            android:button="@null"
+            android:drawableTop="@drawable/shop_4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/s_button4"/>
+
+    </RadioGroup>
+</LinearLayout>

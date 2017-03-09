@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_content_empty"
+       android:layout_gravity="center"
+        android:layout_marginTop="80dp"/>
+<TextView
+    android:layout_gravity="center"
+    android:layout_marginTop="25dp"
+    android:textSize="18dp"
+    android:textColor="#a39c9c"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="没登录，超多精彩内容看不鸟"/>
+    <ImageView
+        android:id="@+id/guan_button"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/attention_empty_login_normal"
+        android:layout_marginTop="40dp"
+        />
+</LinearLayout>
