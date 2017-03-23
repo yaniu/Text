@@ -3,6 +3,7 @@ package com.example.administrator.yn_new.fragment;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +38,11 @@ import com.tencent.tauth.UiError;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -60,7 +67,7 @@ public class Fragment_v extends Fragment {
     private Handler handler;
     int a=0;
     private String[] st = {"V9LG4CHOR", "V9LG4E6VR", "00850FRB"};
-    private String http_url = "http://c.3g.163.com/nc/video/list/"+st[a]+"/n/10-10.html";
+
     private static final String APP_ID = "1105602574"; //获取的APPID
     private ShareUiListener mIUiListener;
     private Tencent mTencent;
@@ -84,13 +91,18 @@ public class Fragment_v extends Fragment {
         handler=new Handler();
         //传入参数APPID
         mTencent = Tencent.createInstance(APP_ID, activity.getApplicationContext());
-        getServerData();
+        getSrver(a);
 
 
     }
 
 
-    private void getServerData() {
+    public  void getSrver(int a){
+
+         String http_url = "http://c.3g.163.com/nc/video/list/"+st[a]+"/n/10-10.html";
+        getServerData(http_url);
+    }
+    private void getServerData(String http_url) {
         AsyncHttpClient client =new AsyncHttpClient();
         client.get(activity,http_url, new TextHttpResponseHandler() {
             @Override
@@ -223,10 +235,77 @@ public class Fragment_v extends Fragment {
                     RadioButton qq = (RadioButton) vs.findViewById(R.id.w_f_qq);
                     RadioButton kj = (RadioButton) vs.findViewById(R.id.w_f_kj);
                     TextView tx = (TextView) vs.findViewById(R.id.w_f_tx);
+                    RadioButton xia = (RadioButton) vs.findViewById(R.id.w_f_xia);
                     tx.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
+                        }
+                    });
+                    xia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
+                            final AlertDialog alertDialog1 = builder1.create();
+                            View view =View.inflate(activity,R.layout.v_v_xia_alder,null);
+                            alertDialog1.setView(view);
+                           Button yes = (Button) view.findViewById(R.id.v_v_xia_yes);
+                            Button no = (Button) view.findViewById(R.id.v_v_xia_no);
+                           final ProgressBar bar = (ProgressBar) view.findViewById(R.id.v_v_xia_jin);
+                          no.setOnClickListener(new View.OnClickListener() {
+                              @Override
+                              public void onClick(View v) {
+                                  alertDialog1.dismiss();
+                              }
+                          });
+                            yes.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    RequestParams params =new RequestParams(list.get(position).getMp4_url());
+                                    params.setSaveFilePath(Environment.getExternalStorageDirectory()+"/"+list.get(position).getTitle());
+                                    params.setUseCookie(true);
+                                    params.setAutoRename(true);
+                                    params.setAutoResume(false);
+                                    x.http().get(params, new Callback.ProgressCallback<File>() {
+                                        @Override
+                                        public void onSuccess(File result) {
+                                       alertDialog1.dismiss();
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable ex, boolean isOnCallback) {
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(CancelledException cex) {
+
+                                        }
+
+                                        @Override
+                                        public void onFinished() {
+
+                                        }
+
+                                        @Override
+                                        public void onWaiting() {
+
+                                        }
+
+                                        @Override
+                                        public void onStarted() {
+
+                                        }
+
+                                        @Override
+                                        public void onLoading(long total, long current, boolean isDownloading) {
+                                          bar.setMax((int)total);
+                                            bar.setProgress((int)current);
+                                        }
+                                    });
+                                }
+                            });
+                          alertDialog1.show();
                         }
                     });
                     qq.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -292,10 +371,12 @@ public class Fragment_v extends Fragment {
         xlv.setXListViewListener(new XListView.IXListViewListener() {
             @Override
             public void onRefresh() {
+               getSrver(a);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                      xlv.stopRefresh();
+
+                        xlv.stopRefresh();
                     }
                 },2000);
             }
@@ -303,7 +384,7 @@ public class Fragment_v extends Fragment {
             @Override
             public void onLoadMore() {
                 a++;
-                getServerData();
+                getSrver(a);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

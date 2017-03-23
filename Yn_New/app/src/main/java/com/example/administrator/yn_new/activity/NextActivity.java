@@ -198,6 +198,7 @@ public class NextActivity extends FragmentActivity {
         pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 showChoosePicDialog();
             }
         });
@@ -485,6 +486,7 @@ public class NextActivity extends FragmentActivity {
             Bitmap photo = extras.getParcelable("data");
             photo = Utils.toRoundBitmap(photo, tempUri); // 这个时候的图片已经被处理成圆形的了
            pic.setImageBitmap(photo);
+            pic1.setImageBitmap(photo);
             uploadPic(photo);
         }
     }

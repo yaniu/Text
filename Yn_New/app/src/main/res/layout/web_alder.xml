@@ -81,6 +81,42 @@
                 android:drawableTop="@mipmap/weibo_sdk_login"/>
         </RadioGroup>
     </LinearLayout>
+    <RadioGroup
+        android:id="@+id/w_f_group"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+
+            android:gravity="center"
+            android:id="@+id/w_f_xia"
+            android:button="@null"
+            android:drawableTop="@mipmap/link_allshare_normal"
+            android:text="下载"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <RadioButton
+            android:id="@+id/w_f_xin"
+            android:gravity="center"
+            android:button="@null"
+            android:drawableTop="@mipmap/message_allshare_normal"
+            android:text="短信"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <RadioButton
+            android:id="@+id/w_f_you"
+            android:gravity="center"
+            android:button="@null"
+            android:drawableTop="@mipmap/mail_allshare_normal"
+            android:text="邮件"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </RadioGroup>
     <TextView
         android:textColor="#696868"
         android:id="@+id/w_f_tx"
