@@ -83,13 +83,11 @@ public class WebActivity extends Activity {
 
             }
         });
-        getServerData();
+
 
     }
 
-    private void getServerData() {
 
-    }
     /**
      * 自定义监听器实现IUiListener，需要3个方法
      * onComplete完成 onError错误 onCancel取消
@@ -168,12 +166,21 @@ public class WebActivity extends Activity {
         xiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(WebActivity.this, "成功", Toast.LENGTH_SHORT).show();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);
-                AlertDialog alertDialog = builder.create();
+                final AlertDialog alertDialog = builder.create();
                 View vs =View.inflate(WebActivity.this,R.layout.web_alder,null);
+                Window window = alertDialog.getWindow();
+                window.setGravity(Gravity.BOTTOM);
                 RadioButton qq = (RadioButton) vs.findViewById(R.id.w_f_qq);
                 RadioButton kj = (RadioButton) vs.findViewById(R.id.w_f_kj);
+                TextView tx = (TextView) vs.findViewById(R.id.w_f_tx);
+                tx.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
                 qq.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -187,6 +194,7 @@ public class WebActivity extends Activity {
                         params.putString(QQShare.SHARE_TO_QQ_TITLE, name);//分享标题
                         params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,url);//内容地址
                         mTencent.shareToQQ(WebActivity.this, params, new ShareUiListener());
+                        Toast.makeText(WebActivity.this, "成功", Toast.LENGTH_SHORT).show();
                     }
                 });
                 kj.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -205,6 +213,7 @@ public class WebActivity extends Activity {
                         params.putString(QzoneShare.SHARE_TO_QQ_TITLE, name);//分享标题
                         params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, url);//分享的链接
                         mTencent.shareToQzone(WebActivity.this, params, new ShareUiListener());
+                        Toast.makeText(WebActivity.this, "成功", Toast.LENGTH_SHORT).show();
                     }
                 });
                 alertDialog.setView(vs);

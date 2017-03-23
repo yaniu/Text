@@ -28,6 +28,12 @@ public class NewsDao {
         String sql ="insert into sc(title,text1,text2,text3,pic1,pic2,pic3,url) values(?,?,?,?,?,?,?,?);";
         database.execSQL(sql,new Object[]{title,text1,text2,text3,pic1,pic2,pic3,url});
     }
+
+    public  void sc_delete(int id){
+        SQLiteDatabase database = helper.getWritableDatabase();
+        String sql ="delete from sc where _id = ?";
+        database.execSQL(sql,new Object[]{id});
+    }
     public  ArrayList<ShouBean> query_SC(){
         ArrayList<ShouBean> list =new ArrayList<>();
         SQLiteDatabase database = helper.getWritableDatabase();

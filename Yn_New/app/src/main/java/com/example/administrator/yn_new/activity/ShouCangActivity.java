@@ -1,6 +1,8 @@
 package com.example.administrator.yn_new.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.yn_new.R;
 import com.example.administrator.yn_new.baen.ShouBean;
@@ -30,22 +33,25 @@ public class ShouCangActivity extends Activity {
     private Handler handler;
     private XListView list1;
     private ArrayList<ShouBean> list;
+    private NewsDao dao;
+    private MyList my;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_fragment_main);
-        NewsDao dao =new NewsDao(ShouCangActivity.this);
+        dao = new NewsDao(ShouCangActivity.this);
         list = dao.query_SC();
         list1 = (XListView) findViewById(R.id.f_list);
         list1.setPullLoadEnable(true);
         list1.setPullRefreshEnable(true);
-        list1.setAdapter(new MyList());
+        my = new MyList();
+        list1.setAdapter(my);
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent =new Intent(ShouCangActivity.this,WebActivity.class);
-               intent.putExtra("name",list.get(position-1).title);
+                intent.putExtra("name",list.get(position-1).title);
                 intent.putExtra("text1",list.get(position-1).text1);
                 intent.putExtra("text2",list.get(position-1).text2);
                 intent.putExtra("text3",list.get(position-1).text3);
@@ -78,6 +84,36 @@ public class ShouCangActivity extends Activity {
                 }, 2000);
             }
         });
+
+       list1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+           @Override
+           public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+               final AlertDialog.Builder builder = new AlertDialog.Builder(ShouCangActivity.this);
+               builder.setTitle("确定删除此收藏吗？");
+               builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+
+                       list.remove(position-1);
+                       int sid = list.get(position-1).id;
+                       dao.sc_delete(sid);
+                       my.notifyDataSetChanged();
+
+                       Toast.makeText(ShouCangActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                   }
+               });
+
+               builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       Toast.makeText(ShouCangActivity.this, "NO~~~~~~", Toast.LENGTH_SHORT).show();
+
+                   }
+               });
+               builder.create().show();
+               return false;
+           }
+       });
     }
     class MyList extends BaseAdapter {
 

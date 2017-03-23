@@ -24,7 +24,7 @@
                 <ImageView
                     android:id="@+id/c_phone"
 
-                   android:src="@mipmap/phon2"
+                   android:src="@mipmap/shouji2"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -229,6 +229,7 @@
 
 
     <View
+
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="2dp"
