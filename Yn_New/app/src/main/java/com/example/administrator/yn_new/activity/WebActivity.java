@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.yn_new.R;
+import com.example.administrator.yn_new.baen.ShouBean;
 import com.example.administrator.yn_new.helper.NewsDao;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
@@ -155,11 +156,24 @@ public class WebActivity extends Activity {
         shou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shou.setSelected(true);
-                Toast.makeText(WebActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
 
 
-             dao.sc_add(name,text1,text2,text3,pic1,pic2,pic3,url);
+                ArrayList<ShouBean> shouBeen = dao.query_SC();
+                boolean falg =true;
+                for(ShouBean s:shouBeen){
+                    if(s.title.equals(name)) {
+                        falg=false;
+                    }
+                }
+                if(falg){
+                    dao.sc_add(name, text1, text2, text3, pic1, pic2, pic3, url);
+                    shou.setSelected(true);
+                    Toast.makeText(WebActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(WebActivity.this, "已收藏过", Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
