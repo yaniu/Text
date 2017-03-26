@@ -371,6 +371,7 @@ public class Fragment_v extends Fragment {
         xlv.setXListViewListener(new XListView.IXListViewListener() {
             @Override
             public void onRefresh() {
+
                getSrver(a);
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -383,6 +384,9 @@ public class Fragment_v extends Fragment {
 
             @Override
             public void onLoadMore() {
+                if(a==2){
+                    a=-1;
+                }
                 a++;
                 getSrver(a);
                 handler.postDelayed(new Runnable() {

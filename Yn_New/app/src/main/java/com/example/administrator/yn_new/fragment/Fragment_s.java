@@ -29,6 +29,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import maqian.baidu.com.xlistviewlibrary.XListView;
+import weeks.amiao.com.imageloader.BitmapUtils;
 
 /**
  * 作者：仝晓雅 on 2017/3/12 20:59
@@ -48,6 +49,7 @@ public class Fragment_s extends Fragment {
     List<ReDianBean.ResultBean.DataBean> list =new ArrayList<>();
     private XListView list1;
     private Handler handler;
+    private BitmapUtils bitmapUtils;
 
 
     @Nullable
@@ -68,6 +70,7 @@ public class Fragment_s extends Fragment {
     }
 
     private void getServerData() {
+        bitmapUtils = new BitmapUtils(getActivity());
         AsyncHttpClient client =new AsyncHttpClient();
         client.get(getActivity(), url, new TextHttpResponseHandler() {
             @Override
@@ -220,7 +223,9 @@ public class Fragment_s extends Fragment {
                     holder.t1_text2.setText(list.get(position).getCategory());
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
-                    x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
+
+                    bitmapUtils.disPlay(holder.pic1,list.get(position).getThumbnail_pic_s());
+                  //  x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
 
                     break;
                 case type2:
@@ -228,8 +233,8 @@ public class Fragment_s extends Fragment {
                     holder.t1_text2.setText(list.get(position).getCategory());
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
-                    x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
-                    x.image().bind(holder.pic2, list.get(position).getThumbnail_pic_s02());
+                    bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
+                    bitmapUtils.disPlay(holder.pic2, list.get(position).getThumbnail_pic_s02());
 
                     break;
                 case type3:
@@ -237,9 +242,9 @@ public class Fragment_s extends Fragment {
                     holder.t1_text2.setText(list.get(position).getCategory());
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
-                    x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
-                    x.image().bind(holder.pic2, list.get(position).getThumbnail_pic_s02());
-                    x.image().bind(holder.pic3, list.get(position).getThumbnail_pic_s03());
+                    bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
+                    bitmapUtils.disPlay(holder.pic2, list.get(position).getThumbnail_pic_s02());
+                    bitmapUtils.disPlay(holder.pic3, list.get(position).getThumbnail_pic_s03());
                     break;
             }
 
