@@ -220,7 +220,7 @@ public class Fragment_v extends Fragment {
             holder.conn.setText(list.get(position).getLength()+"万次播放");
             holder.zan.setText(list.get(position).getPlayCount()+"");
 
-            boolean up = holder.jcv.setUp(list.get(position).getMp4_url(),  "");
+            boolean up = holder.jcv.setUp(list.get(position).getMp4_url(), "");
             if(up){
                 Glide.with(activity).load(list.get(position).getCover()).into(holder.jcv.thumbImageView);
             }

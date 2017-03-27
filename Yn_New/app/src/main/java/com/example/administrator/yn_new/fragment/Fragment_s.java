@@ -3,6 +3,7 @@ package com.example.administrator.yn_new.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,10 +13,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.yn_new.R;
 import com.example.administrator.yn_new.activity.WebActivity;
 import com.example.administrator.yn_new.baen.ReDianBean;
+import com.example.administrator.yn_new.utiles.MyNexTO;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -50,6 +53,7 @@ public class Fragment_s extends Fragment {
     private XListView list1;
     private Handler handler;
     private BitmapUtils bitmapUtils;
+    private ImageView pic;
 
 
     @Nullable
@@ -80,19 +84,31 @@ public class Fragment_s extends Fragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-              Gson gson =new Gson();
+               Gson gson =new Gson();
                 ReDianBean bean = gson.fromJson(responseString, ReDianBean.class);
                 List<ReDianBean.ResultBean.DataBean> data = bean.getResult().getData();
                 for(int i=0;i<data.size();i++){
                     list.add(data.get(i));
                 }
-                list1.setAdapter(new MyList());
+                boolean my =MyNexTO.isNext(getActivity());
+                if(!my){
+                    Toast.makeText(getActivity(), "请设置联网", Toast.LENGTH_SHORT).show();
+
+
+                }else{
+                    pic.setVisibility(View.INVISIBLE);
+                    list1.setAdapter(new MyList());
+                }
+
+
+
             }
         });
     }
 
     private void initView(View view) {
         list1 = (XListView) view.findViewById(R.id.f_list);
+        pic = (ImageView) view.findViewById(R.id.f_pic);
         list1.setPullLoadEnable(true);
         list1.setPullRefreshEnable(true);
         list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -224,8 +240,8 @@ public class Fragment_s extends Fragment {
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
 
-                    bitmapUtils.disPlay(holder.pic1,list.get(position).getThumbnail_pic_s());
-                  //  x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
+                    //bitmapUtils.disPlay(holder.pic1,list.get(position).getThumbnail_pic_s());
+                   x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
 
                     break;
                 case type2:
@@ -233,18 +249,23 @@ public class Fragment_s extends Fragment {
                     holder.t1_text2.setText(list.get(position).getCategory());
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
-                    bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
-                    bitmapUtils.disPlay(holder.pic2, list.get(position).getThumbnail_pic_s02());
-
+                   // bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
+                  //  bitmapUtils.disPlay(holder.pic2, list.get(position).getThumbnail_pic_s02());
+                    x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
+                    x.image().bind(holder.pic2, list.get(position).getThumbnail_pic_s02());
                     break;
                 case type3:
                     holder.t1_text1.setText(list.get(position).getTitle());
                     holder.t1_text2.setText(list.get(position).getCategory());
                     holder.t1_text3.setText(list.get(position).getAuthor_name());
                     holder.t1_text4.setText(list.get(position).getDate());
-                    bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
+                 /*   bitmapUtils.disPlay(holder.pic1, list.get(position).getThumbnail_pic_s());
                     bitmapUtils.disPlay(holder.pic2, list.get(position).getThumbnail_pic_s02());
-                    bitmapUtils.disPlay(holder.pic3, list.get(position).getThumbnail_pic_s03());
+                    bitmapUtils.disPlay(holder.pic3, list.get(position).getThumbnail_pic_s03());*/
+                    x.image().bind(holder.pic1, list.get(position).getThumbnail_pic_s());
+                    x.image().bind(holder.pic2, list.get(position).getThumbnail_pic_s02());
+                    x.image().bind(holder.pic3, list.get(position).getThumbnail_pic_s03());
+
                     break;
             }
 

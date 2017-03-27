@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -194,6 +195,43 @@ public class NextActivity extends FragmentActivity {
         lin.setVisibility(View.VISIBLE);
         RadioGroup group = (RadioGroup) menu.findViewById(R.id.c_ri_group);
         c_ri_jian = (RadioButton) menu.findViewById(R.id.c_ri_jian);
+        RadioButton c_ri_she = (RadioButton) menu.findViewById(R.id.c_ri_she);
+        RadioButton c_ri_xia = (RadioButton) menu.findViewById(R.id.c_ri_xia);
+        c_ri_xia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NextActivity.this, "ssdsadsd", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //设置网络
+        c_ri_she.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(NextActivity.this,SheZhiActivity.class);
+                startActivity(intent);
+               /* final AlertDialog.Builder builder = new AlertDialog.Builder(NextActivity.this);
+               builder.setTitle("请选择要选的网络");
+                String [] srt =new String[]{"wifi","手机流量","网络"};
+                builder.setSingleChoiceItems(srt, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                           Intent inten1 =new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                           startActivity(inten1);
+
+                    }
+
+                });
+                builder.setSingleChoiceItems(srt, 1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent =new Intent("android.settings.WIFI_SETTINGS");
+                        startActivity(intent);
+                    }
+
+                });
+                builder.show();*/
+            }
+        });
         //点击QQ头像可以更换自己的自拍
         pic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,10 +274,10 @@ public class NextActivity extends FragmentActivity {
                             lin.setVisibility(View.GONE);
                             qq_lin.setVisibility(View.VISIBLE);
 
-                            qq_name.setText(nickname);
+                            qq_name.setText(phone+"");
                             x.image().bind(pic, figureurl_qq_1,options);
                             x.image().bind(pic1, figureurl_qq_1,options);
-                            xiaoxi.setText(phone+"");
+                          // qq_name.setText(phone+"");
                         }
                     }
                 });

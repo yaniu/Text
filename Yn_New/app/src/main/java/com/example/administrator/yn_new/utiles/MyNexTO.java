@@ -10,7 +10,7 @@ import android.net.NetworkInfo;
  */
 
 public class MyNexTO {
-    public boolean isNext(Context context){
+    public static boolean isNext(Context context){
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if(info!=null){
@@ -18,5 +18,30 @@ public class MyNexTO {
         }else{
             return false;
         }
+    }
+    //判断是否是wifi
+    public static boolean isWifi(Context context) {
+        //网络连接管理器
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        //获取网络信息
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        if (info != null && info.getType() == connectivityManager.TYPE_WIFI) {
+            return true;
+        }
+
+        return false;
+    }
+
+    //判断是否是手机流量
+    public static boolean isMobile(Context context) {
+        //网络连接管理器
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        //获取网络信息
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        if (info != null && info.getType() == connectivityManager.TYPE_MOBILE) {
+            return true;
+        }
+
+        return false;
     }
 }

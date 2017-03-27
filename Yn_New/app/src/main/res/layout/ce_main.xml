@@ -24,7 +24,7 @@
                 <ImageView
                     android:id="@+id/c_phone"
 
-                   android:src="@mipmap/shouji2"
+                   android:src="@mipmap/phon2"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
