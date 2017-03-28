@@ -33,6 +33,7 @@ import com.example.administrator.yn_new.fragment.Fragment_v;
 import com.example.administrator.yn_new.helper.NewsDao;
 import com.example.administrator.yn_new.utiles.Utils;
 import com.google.gson.Gson;
+import com.jaeger.library.StatusBarUtil;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -53,6 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.RegisterPage;
@@ -107,6 +109,7 @@ public class NextActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // 判断是否有主题存储
 
         if(savedInstanceState != null){
@@ -143,6 +146,11 @@ public class NextActivity extends FragmentActivity {
         getServerData();
         //设置位置下标
         pager.setCurrentItem(posotion);
+        //设置沉浸式
+        JPushInterface.setDebugMode(true);
+        StatusBarUtil.setColor(NextActivity.this,getResources().getColor(R.color.chenColorPrimary),0);
+        StatusBarUtil.setTransparent(NextActivity.this);
+        StatusBarUtil.setTranslucent(NextActivity.this,112);//设置标题栏为半透明颜色
     }
     //当前界面的内容
     private void getServerData() {

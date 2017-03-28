@@ -1,12 +1,15 @@
 package com.example.administrator.yn_new.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.administrator.yn_new.R;
+import com.jaeger.library.StatusBarUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -39,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         //初始化JPush
         JPushInterface.init(this);
         //设置debug模式
+
         JPushInterface.setDebugMode(true);
+        //设置与标题栏颜色一样
+        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(R.color.chenColorPrimary),0);
+        //设置他的透明度
+        StatusBarUtil.setTransparent(MainActivity.this);
+        StatusBarUtil.setTranslucent(MainActivity.this,112);//设置标题栏为半透明颜色
     }
+
 }
