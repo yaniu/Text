@@ -1,6 +1,7 @@
 package com.example.administrator.yn_new.utiles;
 
 import android.app.Application;
+import android.content.Context;
 
 import org.xutils.x;
 
@@ -10,10 +11,19 @@ import org.xutils.x;
  */
 
 public class MyApp extends Application {
-
+    public static int fontInt = 1;
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         x.Ext.init(this);
+    }
+    /**
+     * 得到上下文
+     * @return
+     */
+    public  static Context getContext(){
+        return context;
     }
 }

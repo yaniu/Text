@@ -52,14 +52,14 @@ public class SheZhiActivity extends Activity {
 
         @Override
         public int getGroupCount() {
-          //  return f_list.size();
+
             return fu_str.length;
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            //return z_list.size();
-            return  zi_str.length;
+
+            return  zi_str[groupPosition].length;
         }
 
         @Override
@@ -115,12 +115,17 @@ public class SheZhiActivity extends Activity {
             }if(groupPosition==0&&childPosition==1){
                 Intent inten1 =new Intent(Settings.ACTION_WIRELESS_SETTINGS);
                 startActivity(inten1);
+            }if(groupPosition==0&&childPosition==2){
+                Intent inten1 =new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(inten1);
             }
             if(groupPosition==1&&childPosition==0){
-                //MyApp.info=0;
+                MyApp.fontInt=0;
 
             }if(groupPosition==1&&childPosition==1){
-               // MyApp.info=1;
+                MyApp.fontInt=1;
+            }if(groupPosition==1&&childPosition==2){
+                MyApp.fontInt=2;
             }
             return true;
         }

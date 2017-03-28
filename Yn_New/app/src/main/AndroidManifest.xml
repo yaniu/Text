@@ -53,6 +53,7 @@
         <activity android:name=".activity.JiaActivity"></activity>
         <activity android:name=".activity.ShouCangActivity"></activity>
         <activity android:name=".activity.SheZhiActivity"></activity>
+        <activity android:name=".activity.XiaActivity"></activity>
 
     </application>
 
