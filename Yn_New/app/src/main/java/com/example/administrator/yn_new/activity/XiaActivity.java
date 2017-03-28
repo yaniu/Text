@@ -68,10 +68,9 @@ public class XiaActivity extends Activity {
     private GestureDetector.OnGestureListener onGestureListener=new GestureDetector.SimpleOnGestureListener(){
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            //e1就是初始状态的MotionEvent对象，e2就是滑动了过后的MotionEvent对象
-            //velocityX和velocityY就是滑动的速率
-            float x = e2.getX() - e1.getX();//滑动后的x值减去滑动前的x值 就是滑动的横向水平距离(x)
-            float y = e2.getY() - e1.getY();//滑动后的y值减去滑动前的y值 就是滑动的纵向垂直距离(y)
+
+            float x = e2.getX() - e1.getX();
+            float y = e2.getY() - e1.getY();
             Log.w("tag", "x>" + x);
             Log.w("tag", "y>" + y);
             Log.w("tag", "velocityX>" + velocityX);
@@ -81,7 +80,7 @@ public class XiaActivity extends Activity {
                 doResult(RIGHT);
                 Log.w("tag", "RIGHT>" + x);
             }
-            //如果滑动的横向距离大于100，表明是左滑了(因为左滑为负数，所以距离大于100就是x值小于-100)
+
             if (x < -100) {
                 Log.w("tag", "LEFT>" + x);
                 doResult(LEFT);
@@ -91,9 +90,9 @@ public class XiaActivity extends Activity {
         }
     };
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {    //注意这里不能用ONTOUCHEVENT方法，不然无效的
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         gestureDetector.onTouchEvent(ev);
-        lv.onTouchEvent(ev);//这几行代码也要执行，将webview载入MotionEvent对象一下，况且用载入把，不知道用什么表述合适
+        lv.onTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -101,12 +100,15 @@ public class XiaActivity extends Activity {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 System.out.println(" ACTION_DOWN");//手指在屏幕上按下
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 System.out.println(" ACTION_MOVE");//手指正在屏幕上滑动
                 break;
             case MotionEvent.ACTION_UP:
+
                 System.out.println(" ACTION_UP");//手指从屏幕抬起了
                 break;
             default:
@@ -121,6 +123,7 @@ public class XiaActivity extends Activity {
         switch (action) {
             case RIGHT:
                 System.out.println("go right");
+                overridePendingTransition(R.anim.anim_1, R.anim.anim_2);
                 finish();
                 break;
             case LEFT:

@@ -23,8 +23,21 @@
             android:gravity="center"
             />
     </LinearLayout>
-<ExpandableListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/shezhi_elv"></ExpandableListView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:id="@+id/f_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/details_slogan_day"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="80dp"/>
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/shezhi_elv"></ExpandableListView>
+    </RelativeLayout>
+
 </LinearLayout>

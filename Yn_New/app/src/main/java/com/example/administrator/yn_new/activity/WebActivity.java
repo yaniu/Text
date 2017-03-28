@@ -125,7 +125,9 @@ public class WebActivity extends Activity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {    //注意这里不能用ONTOUCHEVENT方法，不然无效的
         gestureDetector.onTouchEvent(ev);
+
         web.onTouchEvent(ev);//这几行代码也要执行，将webview载入MotionEvent对象一下，况且用载入把，不知道用什么表述合适
+
         return super.dispatchTouchEvent(ev);
     }
 
@@ -133,12 +135,15 @@ public class WebActivity extends Activity {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 System.out.println(" ACTION_DOWN");//手指在屏幕上按下
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 System.out.println(" ACTION_MOVE");//手指正在屏幕上滑动
                 break;
             case MotionEvent.ACTION_UP:
+                overridePendingTransition(R.anim.anim_1, R.anim.anim_2);
                 System.out.println(" ACTION_UP");//手指从屏幕抬起了
                 break;
             default:
@@ -153,6 +158,7 @@ public class WebActivity extends Activity {
         switch (action) {
             case RIGHT:
                 System.out.println("go right");
+
                 finish();
                 break;
             case LEFT:

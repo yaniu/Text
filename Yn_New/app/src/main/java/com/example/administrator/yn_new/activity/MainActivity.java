@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.administrator.yn_new.R;
 import com.jaeger.library.StatusBarUtil;
@@ -49,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
         //设置他的透明度
         StatusBarUtil.setTransparent(MainActivity.this);
         StatusBarUtil.setTranslucent(MainActivity.this,112);//设置标题栏为半透明颜色
+    }
+    //再按退出
+    private long exitTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() ==
+                KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

@@ -245,10 +245,10 @@ public class Fragment_s extends Fragment {
                         holder.t1_text4.setTextSize(MyZiti.px2dip(15));
 
                     }else if(MyApp.fontInt==1){
-                        holder.t1_text1.setTextSize(MyZiti.px2dip(20));
-                        holder.t1_text2.setTextSize(MyZiti.px2dip(20));
-                        holder.t1_text3.setTextSize(MyZiti.px2dip(20));
-                        holder.t1_text4.setTextSize(MyZiti.px2dip(20));
+                        holder.t1_text1.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text3.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(25));
                     }else{
                         holder.t1_text1.setTextSize(MyZiti.px2dip(35));
                         holder.t1_text2.setTextSize(MyZiti.px2dip(35));
@@ -265,12 +265,23 @@ public class Fragment_s extends Fragment {
 
                     break;
                 case type2:
+
                     if(MyApp.fontInt==0){
                         holder.t1_text1.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text3.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(15));
+
                     }else if(MyApp.fontInt==1){
-                        holder.t1_text2.setTextSize(MyZiti.px2dip(20));
+                        holder.t1_text1.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text3.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(25));
                     }else{
+                        holder.t1_text1.setTextSize(MyZiti.px2dip(35));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(35));
                         holder.t1_text3.setTextSize(MyZiti.px2dip(35));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(35));
                     }
                     holder.t1_text1.setText(list.get(position).getTitle());
                     holder.t1_text2.setText(list.get(position).getCategory());
@@ -282,14 +293,23 @@ public class Fragment_s extends Fragment {
                     x.image().bind(holder.pic2, list.get(position).getThumbnail_pic_s02());
                     break;
                 case type3:
+
                     if(MyApp.fontInt==0){
                         holder.t1_text1.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text3.setTextSize(MyZiti.px2dip(15));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(15));
+
                     }else if(MyApp.fontInt==1){
-                        holder.t1_text2.setTextSize(MyZiti.px2dip(20));
+                        holder.t1_text1.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text3.setTextSize(MyZiti.px2dip(25));
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(25));
                     }else{
+                        holder.t1_text1.setTextSize(MyZiti.px2dip(35));
+                        holder.t1_text2.setTextSize(MyZiti.px2dip(35));
                         holder.t1_text3.setTextSize(MyZiti.px2dip(35));
-
-
+                        holder.t1_text4.setTextSize(MyZiti.px2dip(35));
                     }
                     holder.t1_text1.setText(list.get(position).getTitle());
                     holder.t1_text2.setText(list.get(position).getCategory());
