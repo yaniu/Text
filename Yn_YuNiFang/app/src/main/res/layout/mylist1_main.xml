@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+<ImageView
+    android:id="@+id/f1_list1_pic"
+    android:src="@mipmap/bottle_no_lottery"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    />
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/f1_list1_text"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="反恐军事反恐的肌肤毒素斯蒂芬斯蒂芬"
+        android:textSize="15dp"
+        android:padding="10dp"
+       />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/f1_list1_price1"
+            android:textColor="#ff1100"
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ 139.5"
+            />
+        <TextView
+            android:id="@+id/f1_list1_price2"
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ 139.5"
+            />
+    </LinearLayout>
+</LinearLayout>
