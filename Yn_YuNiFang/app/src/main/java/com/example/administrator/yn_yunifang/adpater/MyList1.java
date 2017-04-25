@@ -1,6 +1,7 @@
 package com.example.administrator.yn_yunifang.adpater;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,14 @@ import java.util.List;
 public class MyList1 extends RecyclerView.Adapter<MyList1.ViewHolder> {
     private  Context context;
     private List<Bean.DataBean.BestSellersBean.GoodsListBeanX> list_2_rcv;
+    private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public  interface  OnItemClickListener{
+        void OnClickListener(View view,int position);
+    }
     public MyList1(Context context, List<Bean.DataBean.BestSellersBean.GoodsListBeanX> list_2_rcv) {
         this.context=context;
         this.list_2_rcv=list_2_rcv;
@@ -31,7 +40,17 @@ public class MyList1 extends RecyclerView.Adapter<MyList1.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =View.inflate(context, R.layout.mylist1_main,null);
-        return new ViewHolder(view);
+        final ViewHolder holder =new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getLayoutPosition();
+                if(onItemClickListener !=null){
+                            onItemClickListener.OnClickListener(v,position);
+                }
+            }
+        });
+        return holder;
     }
 
     @Override
@@ -45,7 +64,7 @@ public class MyList1 extends RecyclerView.Adapter<MyList1.ViewHolder> {
         holder.price1.setText("￥"+shop_price+"");
         holder.price2.setText("￥"+market_price);
         Picasso.with(context).load(goods_img).placeholder(R.mipmap.default_2).error(R.mipmap.default_2).into(holder.pic);
-
+        holder.price2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     @Override

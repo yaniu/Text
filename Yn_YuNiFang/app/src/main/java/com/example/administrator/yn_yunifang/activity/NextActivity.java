@@ -6,6 +6,7 @@ package com.example.administrator.yn_yunifang.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,14 +35,6 @@ public class NextActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_main);
-        initView();
-
-    }
-
-    private void initView() {
-        pic1 = (ImageView) findViewById(R.id.n_pic1);
-        pic2 = (ImageView) findViewById(R.id.n_pic2);
-        pic3 = (ImageView) findViewById(R.id.n_pic3);
 
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -51,13 +44,23 @@ public class NextActivity extends FragmentActivity implements View.OnClickListen
         transaction.add(R.id.n_f, f1);
         transaction.add(R.id.n_f, f2);
         transaction.add(R.id.n_f, f3);
-        transaction.hide(f2);
-        transaction.hide(f3);
         transaction.commit();
-        pic1.setSelected(true);
+        initView();
+    }
+
+    private void initView() {
+        pic1 = (ImageView) findViewById(R.id.n_pic1);
+        pic2 = (ImageView) findViewById(R.id.n_pic2);
+        pic3 = (ImageView) findViewById(R.id.n_pic3);
         pic1.setOnClickListener(this);
         pic2.setOnClickListener(this);
         pic3.setOnClickListener(this);
+
+        show(f1,f2,f3);
+        pic1.setSelected(true);
+        pic2.setSelected(false);
+        pic3.setSelected(false);
+
 
 
 
@@ -66,42 +69,52 @@ public class NextActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case  R.id.n_pic:
-
-                break;
             case  R.id.n_pic1:
                 pic1.setSelected(true);
                 pic2.setSelected(false);
                 pic3.setSelected(false);
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.show(f1);
-                transaction.hide(f2);
-                transaction.hide(f3);
-                transaction.commit();
+               show(f1,f2,f3);
 
                 break;
             case  R.id.n_pic2:
                 pic2.setSelected(true);
                 pic1.setSelected(false);
                 pic3.setSelected(false);
-                FragmentTransaction transaction1 = manager.beginTransaction();
-                transaction1.show(f2);
-                transaction1.hide(f1);
-                transaction1.hide(f3);
-                transaction1.commit();
+               show(f2,f1,f3);
 
                 break;
             case  R.id.n_pic3:
+                boolean falg =LogActivity.falg;
+                if(!falg){
+                    Intent intent =new Intent(NextActivity.this,LogActivity.class);
+                   startActivityForResult(intent,1);
+                }
+                    pic3.setSelected(true);
+                    pic1.setSelected(false);
+                    pic2.setSelected(false);
+                   show(f3,f1,f2);
+
+                break;
+        }
+    }
+    public  void show(Fragment f1,Fragment f2,Fragment f3){
+        FragmentTransaction transactions = manager.beginTransaction();
+        transactions.show(f1);
+        transactions.hide(f2);
+        transactions.hide(f3);
+        transactions.commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data!=null){
+            if(requestCode==1&&resultCode==2){
                 pic3.setSelected(true);
                 pic1.setSelected(false);
                 pic2.setSelected(false);
-                FragmentTransaction transaction2 = manager.beginTransaction();
-                transaction2.show(f3);
-                transaction2.hide(f2);
-                transaction2.hide(f1);
-                transaction2.commit();
-
-                break;
+              show(f3,f1,f2);
+            }
         }
     }
 }

@@ -22,6 +22,15 @@ import java.util.List;
 public class MyList2 extends RecyclerView.Adapter<MyList2.ViewHolder> {
     private  Context context;
     private  List<Bean.DataBean.SubjectsBean.GoodsListBean> list_3_rcv;
+    private MyList2.OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public  interface  OnItemClickListener{
+        void OnClickListener(int position,List<Bean.DataBean.SubjectsBean.GoodsListBean> list);
+    }
     public MyList2(Context context, List<Bean.DataBean.SubjectsBean.GoodsListBean> list_3_rcv) {
         this.context=context;
         this.list_3_rcv=list_3_rcv;
@@ -30,16 +39,33 @@ public class MyList2 extends RecyclerView.Adapter<MyList2.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =View.inflate(context, R.layout.mylist1_main,null);
-        return new ViewHolder(view);
+        final ViewHolder holder =  new ViewHolder(view);
+       /* view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener!=null){
+                    int position = holder.getLayoutPosition();
+                    onItemClickListener.OnClickListener(position,list_3_rcv);
+                }
+            }
+        });*/
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
             holder.text.setText(list_3_rcv.get(position).getGoods_name());
              holder.price1.setText("￥"+list_3_rcv.get(position).getShop_price()+"");
              holder.price2.setText("￥ "+list_3_rcv.get(position).getMarket_price());
              Picasso.with(context).load(list_3_rcv.get(position).getGoods_img()).placeholder(R.mipmap.default_2).error(R.mipmap.default_2).into(holder.pic);
-
+            holder.pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemClickListener!=null){
+                        onItemClickListener.OnClickListener(position,list_3_rcv);
+                    }
+                }
+            });
     }
 
     @Override

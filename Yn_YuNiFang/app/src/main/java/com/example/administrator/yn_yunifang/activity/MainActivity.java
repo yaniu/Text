@@ -1,5 +1,8 @@
 package com.example.administrator.yn_yunifang.activity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.midi.MidiManager;
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             img.setImageResource(pic[i]);
             p_list.add(img);
         }
+
         pager.setAdapter(new MyPager());
         handler.sendEmptyMessageDelayed(0,2000);
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                        });
 
                    }
+
                }
             }
 
